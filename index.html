@@ -216,7 +216,7 @@
 <nav class="sidebar">
   <div class="logo">
     <div class="logo-name">FinanceOS</div>
-    <div class="logo-sub">Controle Pessoal </div>
+    <div class="logo-sub">Controle Pessoal</div>
   </div>
   <div class="nav-section">
     <div class="nav-label">Visão Geral</div>
@@ -1768,6 +1768,36 @@ function init() {
   renderDashboard();
   startRealtimeSync();
 }
+
+// ============================================================
+// EXPÕE FUNÇÕES AO ESCOPO GLOBAL (necessário por usar type="module")
+// ============================================================
+window.showTab           = showTab;
+window.setYear           = setYear;
+window.openModal         = openModal;
+window.closeModal        = closeModal;
+window.updateCatOptions  = updateCatOptions;
+window.saveLancamento    = saveLancamento;
+window.editLancamento    = editLancamento;
+window.deleteLancamento  = deleteLancamento;
+window.clearFilters      = clearFilters;
+window.renderLancamentos = renderLancamentos;
+window.savePlanejamento  = savePlanejamento;
+window.selectMonth       = selectMonth;
+window.openPlanModal     = openPlanModal;
+window.saveInvestimento  = saveInvestimento;
+window.editInvestimento  = editInvestimento;
+window.deleteInvestimento= deleteInvestimento;
+window.saveAporte        = saveAporte;
+window.deleteAporte      = deleteAporte;
+window.saveMeta          = saveMeta;
+window.editMeta          = editMeta;
+window.deleteMeta        = deleteMeta;
+window.openDeposito      = openDeposito;
+window.saveDeposito      = saveDeposito;
+window.saveCategoria     = saveCategoria;
+window.editCategoria     = editCategoria;
+window.deleteCategoria   = deleteCategoria;
 
 // Arranca tudo carregando do Firebase
 loadState();
