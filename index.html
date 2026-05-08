@@ -27,8 +27,50 @@
 
   /* LAYOUT */
   .app { display: flex; min-height: 100vh; }
-  .sidebar { width: 220px; background: var(--surface); border-right: 1px solid var(--border); padding: 28px 0; display: flex; flex-direction: column; flex-shrink: 0; position: fixed; top: 0; left: 0; height: 100vh; z-index: 100; }
+  .sidebar { width: 220px; background: var(--surface); border-right: 1px solid var(--border); padding: 28px 0; display: flex; flex-direction: column; flex-shrink: 0; position: fixed; top: 0; left: 0; height: 100vh; z-index: 200; transition: transform 0.28s cubic-bezier(.4,0,.2,1); }
   .main { margin-left: 220px; flex: 1; padding: 32px; min-height: 100vh; }
+
+  /* HAMBURGER BUTTON — visível só no mobile */
+  .hamburger { display: none; position: fixed; top: 14px; left: 14px; z-index: 300; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; width: 42px; height: 42px; align-items: center; justify-content: center; cursor: pointer; flex-direction: column; gap: 5px; padding: 10px; }
+  .hamburger span { display: block; width: 20px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.2s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* OVERLAY escuro atrás do menu no mobile */
+  .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 150; backdrop-filter: blur(2px); }
+  .sidebar-overlay.open { display: block; }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .hamburger { display: flex; }
+    .sidebar { transform: translateX(-100%); padding-top: 70px; }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; padding: 20px 16px; padding-top: 70px; }
+
+    /* Cards em 2 colunas no mobile */
+    .cards-4 { grid-template-columns: repeat(2, 1fr); }
+    .cards-3 { grid-template-columns: repeat(2, 1fr); }
+    .two-col { grid-template-columns: 1fr; }
+    .three-col { grid-template-columns: 1fr; }
+    .inv-grid { grid-template-columns: 1fr; }
+    .month-grid { grid-template-columns: repeat(3, 1fr); }
+    .cat-grid { grid-template-columns: repeat(2, 1fr); }
+    .form-grid { grid-template-columns: 1fr; }
+
+    /* Tabelas roláveis no mobile */
+    table { font-size: 12px; }
+    th, td { padding: 9px 10px; }
+
+    /* Page header empilhado */
+    .page-header.flex-between { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .page-title { font-size: 22px; }
+  }
+
+  @media (max-width: 420px) {
+    .cards-4, .cards-3 { grid-template-columns: 1fr; }
+    .month-grid { grid-template-columns: repeat(2, 1fr); }
+  }
 
   .logo { padding: 0 24px 28px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
   .logo-name { font-family: var(--font-display); font-size: 22px; color: var(--accent); line-height: 1; }
@@ -212,8 +254,16 @@
 
 <div class="app">
 
+<!-- HAMBURGER -->
+<button class="hamburger" id="hamburger" onclick="toggleSidebar()">
+  <span></span><span></span><span></span>
+</button>
+
+<!-- OVERLAY -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
 <!-- SIDEBAR -->
-<nav class="sidebar">
+<nav class="sidebar" id="sidebar">
   <div class="logo">
     <div class="logo-name">FinanceOS</div>
     <div class="logo-sub">Controle Pessoal</div>
@@ -961,6 +1011,23 @@ function lancsByMonth(y,m) { return lancsByYear(y).filter(l=>new Date(l.data).ge
 function totalTipo(arr,tipo) { return arr.filter(l=>l.tipo==tipo).reduce((s,l)=>s+l.valor,0); }
 
 // ============================================================
+// MENU MOBILE
+// ============================================================
+function toggleSidebar() {
+  const s = document.getElementById('sidebar');
+  const o = document.getElementById('sidebarOverlay');
+  const h = document.getElementById('hamburger');
+  s.classList.toggle('open');
+  o.classList.toggle('open');
+  h.classList.toggle('open');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
+
+// ============================================================
 // NAV & TABS
 // ============================================================
 function showTab(id) {
@@ -970,6 +1037,7 @@ function showTab(id) {
   document.querySelectorAll('.nav-item').forEach(n=>{
     if(n.getAttribute('onclick')===`showTab('${id}')`) n.classList.add('active');
   });
+  closeSidebar();
   renderTab(id);
 }
 
@@ -1773,6 +1841,8 @@ function init() {
 // EXPÕE FUNÇÕES AO ESCOPO GLOBAL (necessário por usar type="module")
 // ============================================================
 window.showTab           = showTab;
+window.toggleSidebar     = toggleSidebar;
+window.closeSidebar      = closeSidebar;
 window.setYear           = setYear;
 window.openModal         = openModal;
 window.closeModal        = closeModal;
