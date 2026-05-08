@@ -41,35 +41,123 @@
   .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 150; backdrop-filter: blur(2px); }
   .sidebar-overlay.open { display: block; }
 
-  /* MOBILE */
+  /* ===================== RESPONSIVO MOBILE ===================== */
   @media (max-width: 768px) {
-    .hamburger { display: flex; }
-    .sidebar { transform: translateX(-100%); padding-top: 70px; }
-    .sidebar.open { transform: translateX(0); }
-    .main { margin-left: 0; padding: 20px 16px; padding-top: 70px; }
 
-    /* Cards em 2 colunas no mobile */
+    /* Menu */
+    .hamburger { display: flex; }
+    .sidebar { transform: translateX(-100%); padding-top: 70px; width: 260px; }
+    .sidebar.open { transform: translateX(0); box-shadow: 4px 0 30px rgba(0,0,0,0.5); }
+    .main { margin-left: 0; padding: 16px; padding-top: 68px; }
+
+    /* Tipografia */
+    .page-title { font-size: 20px; }
+    .card-value { font-size: 20px; }
+
+    /* Headers de página empilhados */
+    .page-header { margin-bottom: 18px; }
+    .flex-between { flex-wrap: wrap; gap: 10px; }
+    .page-header.flex-between { flex-direction: column; align-items: flex-start; }
+    .page-header .btn { width: 100%; justify-content: center; }
+
+    /* Cards */
+    .cards-row { gap: 10px; margin-bottom: 16px; }
     .cards-4 { grid-template-columns: repeat(2, 1fr); }
     .cards-3 { grid-template-columns: repeat(2, 1fr); }
-    .two-col { grid-template-columns: 1fr; }
-    .three-col { grid-template-columns: 1fr; }
+    .cards-2 { grid-template-columns: repeat(2, 1fr); }
+    .card { padding: 14px 16px; }
+    .card-value { font-size: 18px; }
+    .card-label { font-size: 10px; }
+
+    /* Layouts de colunas */
+    .two-col { grid-template-columns: 1fr; gap: 14px; }
+    .three-col { grid-template-columns: 1fr; gap: 14px; }
     .inv-grid { grid-template-columns: 1fr; }
-    .month-grid { grid-template-columns: repeat(3, 1fr); }
-    .cat-grid { grid-template-columns: repeat(2, 1fr); }
-    .form-grid { grid-template-columns: 1fr; }
+    .cat-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .month-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
 
-    /* Tabelas roláveis no mobile */
-    table { font-size: 12px; }
-    th, td { padding: 9px 10px; }
+    /* Formulários */
+    .form-grid { grid-template-columns: 1fr; gap: 0; }
+    .modal { padding: 20px 16px; border-radius: 16px 16px 0 0; position: fixed; bottom: 0; left: 0; right: 0; width: 100%; max-width: 100%; max-height: 92vh; margin: 0; }
+    .modal-overlay { align-items: flex-end; }
+    .modal-title { font-size: 18px; margin-bottom: 16px; }
+    .modal-actions { flex-direction: column-reverse; }
+    .modal-actions .btn { width: 100%; justify-content: center; padding: 12px; }
 
-    /* Page header empilhado */
-    .page-header.flex-between { flex-direction: column; align-items: flex-start; gap: 12px; }
-    .page-title { font-size: 22px; }
+    /* Tabelas — scroll horizontal */
+    .table-wrap { border-radius: 10px; }
+    .table-header { padding: 14px 16px; flex-wrap: wrap; gap: 8px; }
+    .scrollable { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table { font-size: 12px; min-width: 500px; }
+    th { padding: 9px 12px; font-size: 10px; }
+    td { padding: 10px 12px; }
+
+    /* Filtros de lançamentos */
+    .card.mb-24 div[style*="display:flex"] { flex-direction: column; align-items: stretch !important; }
+    .card.mb-24 select,
+    .card.mb-24 input { width: 100% !important; }
+    .card.mb-24 .btn { width: 100%; justify-content: center; }
+
+    /* Gráfico de barras — menor altura */
+    .bar-chart { height: 100px; gap: 4px; }
+    .chart-area { padding: 16px; }
+    .chart-title { font-size: 13px; margin-bottom: 12px; }
+
+    /* Donut — empilhado verticalmente */
+    .donut-wrap { width: 100px; height: 100px; }
+    .donut-val { font-size: 14px; }
+
+    /* Investimentos */
+    .inv-card { padding: 16px; }
+    .inv-amount { font-size: 20px; }
+    .inv-detail { flex-wrap: wrap; gap: 10px; }
+    .inv-detail-item { min-width: 80px; }
+
+    /* Metas */
+    .plan-card { padding: 16px; }
+    .plan-header { flex-direction: column; gap: 10px; }
+    .plan-header .action-row { width: 100%; justify-content: flex-start; }
+    .plan-amounts { flex-wrap: wrap; gap: 12px; }
+    .plan-amount-item span { font-size: 15px; }
+
+    /* Categorias */
+    .cat-item { padding: 10px; gap: 8px; }
+    .cat-emoji { font-size: 18px; }
+
+    /* Alertas */
+    .alert-box { font-size: 12px; padding: 10px 12px; }
+
+    /* Meses */
+    .month-card { padding: 10px; }
+    .month-balance { font-size: 13px; }
+    .month-name { font-size: 10px; }
+
+    /* Section titles */
+    .section-title { font-size: 13px; }
+
+    /* Botões de ação nas tabelas */
+    .action-row { gap: 4px; }
+    .btn-sm { padding: 4px 8px; font-size: 11px; }
+
+    /* Tags */
+    .tag { font-size: 10px; padding: 2px 6px; }
+    .badge { font-size: 10px; padding: 2px 7px; }
+
+    /* Config banner */
+    #configBanner { font-size: 12px; padding: 10px 16px; }
+
+    /* Canvas relatórios */
+    #lineChartCanvas { width: 100% !important; }
   }
 
-  @media (max-width: 420px) {
-    .cards-4, .cards-3 { grid-template-columns: 1fr; }
+  /* Telas muito pequenas (< 380px) */
+  @media (max-width: 380px) {
+    .cards-4 { grid-template-columns: 1fr 1fr; }
+    .cards-3 { grid-template-columns: 1fr 1fr; }
     .month-grid { grid-template-columns: repeat(2, 1fr); }
+    .cat-grid { grid-template-columns: 1fr; }
+    .card-value { font-size: 16px; }
+    .main { padding: 12px; padding-top: 64px; }
   }
 
   .logo { padding: 0 24px 28px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
@@ -335,7 +423,7 @@
     <!-- Donut por categoria -->
     <div class="chart-area">
       <div class="chart-title">Gastos por Categoria</div>
-      <div style="display:flex;gap:24px;align-items:center;margin-top:10px">
+      <div style="display:flex;gap:24px;align-items:center;margin-top:10px;flex-wrap:wrap">
         <div class="donut-wrap">
           <svg width="130" height="130" id="donutSvg"></svg>
           <div class="donut-label"><div class="donut-val" id="donutVal">R$ 0</div><div class="donut-sub">Total</div></div>
@@ -373,9 +461,9 @@
   <!-- Filtros -->
   <div class="card mb-24" style="padding:16px 20px">
     <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end">
-      <div>
+      <div style="flex:1;min-width:130px">
         <div style="font-size:11px;color:var(--text3);margin-bottom:5px;letter-spacing:1px;text-transform:uppercase">Mês</div>
-        <select id="filterMonth" onchange="renderLancamentos()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:8px;font-family:var(--font-body);font-size:13px;outline:none">
+        <select id="filterMonth" onchange="renderLancamentos()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:8px;font-family:var(--font-body);font-size:13px;outline:none;width:100%">
           <option value="">Todos</option>
           <option value="0">Janeiro</option><option value="1">Fevereiro</option><option value="2">Março</option>
           <option value="3">Abril</option><option value="4">Maio</option><option value="5">Junho</option>
@@ -383,23 +471,23 @@
           <option value="9">Outubro</option><option value="10">Novembro</option><option value="11">Dezembro</option>
         </select>
       </div>
-      <div>
+      <div style="flex:1;min-width:130px">
         <div style="font-size:11px;color:var(--text3);margin-bottom:5px;letter-spacing:1px;text-transform:uppercase">Tipo</div>
-        <select id="filterTipo" onchange="renderLancamentos()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:8px;font-family:var(--font-body);font-size:13px;outline:none">
+        <select id="filterTipo" onchange="renderLancamentos()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:8px;font-family:var(--font-body);font-size:13px;outline:none;width:100%">
           <option value="">Todos</option><option value="entrada">Entradas</option><option value="saida">Saídas</option>
         </select>
       </div>
-      <div>
+      <div style="flex:1;min-width:130px">
         <div style="font-size:11px;color:var(--text3);margin-bottom:5px;letter-spacing:1px;text-transform:uppercase">Categoria</div>
-        <select id="filterCat" onchange="renderLancamentos()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:8px;font-family:var(--font-body);font-size:13px;outline:none">
+        <select id="filterCat" onchange="renderLancamentos()" style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:8px;font-family:var(--font-body);font-size:13px;outline:none;width:100%">
           <option value="">Todas</option>
         </select>
       </div>
-      <div>
+      <div style="flex:2;min-width:160px">
         <div style="font-size:11px;color:var(--text3);margin-bottom:5px;letter-spacing:1px;text-transform:uppercase">Buscar</div>
-        <input id="filterSearch" oninput="renderLancamentos()" placeholder="Descrição..." style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:8px;font-family:var(--font-body);font-size:13px;outline:none;width:200px" />
+        <input id="filterSearch" oninput="renderLancamentos()" placeholder="Descrição..." style="background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:8px;font-family:var(--font-body);font-size:13px;outline:none;width:100%" />
       </div>
-      <button class="btn btn-ghost btn-sm" onclick="clearFilters()">Limpar filtros</button>
+      <button class="btn btn-ghost btn-sm" onclick="clearFilters()" style="flex-shrink:0">Limpar filtros</button>
     </div>
   </div>
 
